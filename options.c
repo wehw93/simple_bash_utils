@@ -1,106 +1,145 @@
 #include"options.h"
-void cat_n(char filename[]){
-      FILE * fp = fopen(filename,"r");
-      if (fp){
-          char c[1];
-          int i = 1;
+void cat_n( char * buf[], size_t *size_file){
+	int sz = *size_file;				
+	for (int i = 0; i <*size_file; i++) {
+			if ((*buf)[i]=='\n')
+			sz+=8;
+		}
+		char * buffer = calloc(sz,sizeof(char));
 		  int flag=1;
-          while ((c[0]=getc(fp))!=EOF){
+		 size_t j = 0;
+		size_t number_line = 1; 
+		 for (int i = 0; i < *size_file; i++){
 			  if (flag ){
-		  		printf("%d ", i);
-			  i++;
+				 sprintf(buffer+j, "%6lu\t", number_line); j+=7; 
 				flag=0;
+				number_line++;
 			  }
-			  if (strcmp(c,"\n") ==0){
+			  if ((*buf)[i]=='\n'){
 				  flag=1;
 			  }
-              printf("%s", c);
+			  sprintf(buffer+j,"%c",(*buf)[i]);
+			 
+			  j++;
           }   
-      }   
-      fclose(fp);
+	 *buf = buffer; 
+		*size_file = sz;
 }
-void cat_b(char filename[]){
-      FILE * fp = fopen(filename,"r");
-      if (fp){
-          char c[1];
-          int i = 1;
+void cat_b( char * buf[], size_t *size_file){
+	int sz = *size_file;
+	for (int i = 0; i <*size_file; i++) {
+			if ((*buf)[i]=='\n')
+			sz+=8;
+		}
+		char *buffer =calloc(sz,sizeof(char));
+		  size_t number_line = 1;
 		  int flag=1;
-          while ((c[0]=getc(fp))!=EOF){
-			  if (flag && strcmp(c,"\n")!=0){
-		  		printf("%d ", i);
-              i++;
+		  int j = 0;
+		 for (int i = 0; i < *size_file; i ++) {
+			  if (flag && (*buf)[i]!='\n'){
+				  sprintf(buffer+j, "%6lu\t",number_line);
+				  j+=7;
+             number_line++;
 				flag=0;
 			  }
-			  if (strcmp(c,"\n") ==0){
+             
+			  if ((*buf)[i]=='\n'){
 				  flag=1;
 			  }
-              printf("%s", c);
-          }   
-      }   
-      fclose(fp);
+			  	sprintf(buffer+j, "%c", (*buf)[i]);
+				j++;
+		  }
+		*size_file = sz;
+       *buf = buffer; 
 }
 
-void  cat_defalut(char filename[]){
-      FILE * fp = fopen(filename,"r");
-      if (fp){
-          char c;
-          while ((c=getc(fp))!=EOF){
-              printf("%c", c);
+void  cat_defalut( char **buf, size_t size_file){
+		char *buffer = calloc(size_file, sizeof(char));
+		  for (int i = 0; i < size_file; i++){
+			sprintf(buffer+i, "%c", (*buf)[i]);
           }   
-      }   
-      fclose(fp);
-}
+	 *buf = buffer; 
+      } 
 
-void cat_t(char filename[]){
-	FILE *fp = fopen(filename,"r");
-	if (fp){
-		char c[1];
-		while((c[0]=getc(fp))!=EOF){
-			if (strcmp(c,"\t")==0){
-					printf("^I");
+void cat_t( char * buf[], size_t *size_file){
+		int sz = *size_file;
+		for (int i = 0; i < *size_file; i++){
+			if ((*buf)[i]=='\t')
+			sz+=2;	
+		}
+		char * buffer = calloc(sz,sizeof(char));
+		int j = 0;
+		for (int i = 0; i < *size_file; i++){
+			if ((*buf)[i] == '\t'){
+				sprintf(buffer+j, "^");
+				j++;
+				sprintf(buffer+j, "I");
+				j++;
 			}
-			else 
-				printf("%s", c);
+			else{ 
+				sprintf(buffer+j, "%c", (*buf)[i]);
+				j++;
+			}
 		}	
-	}
-	fclose(fp);
+	
+	 *buf = buffer; 
+		*size_file = sz;
 }
-void  cat_s(char filename[]){
-      FILE * fp = fopen(filename,"r");
-      if (fp){
-		  int flag = 0;
-		  int flag_line=0;
-          char c[1];
-          while ((c[0]=getc(fp))!=EOF){
-         	if (!flag &&  strcmp(c,"\n")==0){
-				flag_line=0;
-					printf("%s", c);
-					flag=1;	
+void cat_s( char * buf[], size_t *size_file){
+		int sz = 0;
+		int per = 0; 
+		  int j = 0;
+		for (int i = 0; i < *size_file;i++){
+		  if ( (*buf)[i]=='\n' && per <2){
+					sz++;
+					per++;
 			} 
-			if (flag && !flag_line && strcmp(c, "\n")==0){
+			if ( (*buf)[i]=='\n' && per >2){
 				continue;
 			}
-			if (strcmp(c,"\n")!=0){
-				if (!flag_line)
-					flag_line=1;
-				printf("%s", c);
-				flag=0;
+			if ((*buf)[i]!='\n'){
+				per = 0;
+				sz++;
 			}
-		  }   
-      }   
-      fclose(fp);
+		}
+		char * buffer = calloc(sz,sizeof(char));
+		per = 0;
+         for (int i = 0; i < *size_file;i++){	
+		  if ( (*buf)[i]=='\n' && per <2){
+				sprintf(buffer+j, "%c", (*buf)[i]);
+				j++;
+				per++;
+			} 
+			if (per>2 && (*buf)[i]=='\n'){
+				continue;
+			}
+			if ((*buf)[i]!='\n'){
+				sprintf(buffer+j, "%c", (*buf)[i]);
+				j++;
+				per = 0;
+			}
+		  }  
+
+	 *buf = buffer; 
+	 *size_file = sz;
 }
 
-void cat_E(char filename[]){
-      FILE * fp = fopen(filename,"r");
-      if (fp){
-          char c[1];
-          while ((c[0]=getc(fp))!=EOF){
-			  if (strcmp(c,"\n")==0){
-				  printf("$");
+void cat_E( char * buf[], size_t *size_file){
+	int sz = *size_file;
+	for (int i = 0; i < *size_file;i++){
+		if ((*buf)[i]=='\n')
+				sz+=1;
+		}
+		char * buffer = calloc(sz,sizeof(char));
+		int j = 0;
+		for (int i = 0; i < *size_file;i++){		  
+			if ((*buf)[i]=='\n'){
+				  sprintf(buffer+j, "$");
+				  j++;
 			  }
-              printf("%s", c);
+			  sprintf(buffer+j, "%c", (*buf)[i]);
+			  j++;
           }   
-      }   
-      fclose(fp);
+	 *buf = buffer; 
+	 *size_file = sz;
 }
