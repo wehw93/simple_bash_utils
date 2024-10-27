@@ -1,0 +1,21 @@
+alo
+ 		piter privet
+ 		
+ 		ff
+
+
+
+	^@
+	^A   \0   
+	
+	^a
+	
+	^e
+	
+	^?
+	
+	
+	^D
+ 		
+ 		fds
+ 	gf
