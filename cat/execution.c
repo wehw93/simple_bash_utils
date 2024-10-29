@@ -1,5 +1,5 @@
 #include"flags.h"
-#include"work_with_file.h"
+#include"../common/work_with_file.h"
 void execution(flag_cat arg, char * argv[], int argc, size_t quantity_files){
 	char * buffer  = calloc(1,sizeof(char));	
 	size_t size_file = 0;
@@ -12,7 +12,6 @@ void execution(flag_cat arg, char * argv[], int argc, size_t quantity_files){
 	int flag_n = 0;
 	int flag_t = 0;
 	int flag_v = 0;
-	for (int i = 0; i < quantity_files; i++){
 		if (arg.baza){
 			cat_defalut( &buffer, size_file);
 		}
@@ -42,7 +41,6 @@ void execution(flag_cat arg, char * argv[], int argc, size_t quantity_files){
 			flag_v = 1;
 			cat_v(&buffer, &size_file);
 		}
-	}
 	for (int i = 0; i < strlen(buffer);i++){		
 		printf("%c", buffer[i]);
 	}
