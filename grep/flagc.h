@@ -2,6 +2,7 @@
 #include<string.h>
 #include<stdlib.h>
 typedef struct  flag_grep{
+	char word[100];
 	int baza;
 	int grep_e;
 	int grep_i;
@@ -11,5 +12,5 @@ typedef struct  flag_grep{
 	int grep_n;
 }flag_grep;
 void execute_options( flag_grep arg, char *buffer[], size_t *size_file);
-void execution(flag_grep arg, char * argv[], int argc, size_t quantity_files, char *file_names[]);
+void execution(flag_grep arg, char * argv[], int argc, size_t quantity_files);
 void par_flags(flag_grep * arg, int argc, char * argv[], size_t *count_files);

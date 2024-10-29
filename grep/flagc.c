@@ -4,7 +4,13 @@ void par_flags(flag_grep * arg, int argc, char * argv[], size_t *count_files){
 	int res = 0;
 	int flag = 0;
 	for (int i = 1; i < argc; i++){
-		if (argv[i][0]!= '-')
+		if (argv[i][0]!= '-'){
+			strcpy((arg->word), argv[i]);
+			break;
+		}
+	}
+	for (int i = 1; i < argc; i++){
+		if (argv[i][0]!= '-' && (strcmp(argv[i], arg->word)!=0))
 			(*count_files)++;	
 	}
 	while((res = getopt_long(argc,argv,"eivcln",NULL, NULL))!=-1){
