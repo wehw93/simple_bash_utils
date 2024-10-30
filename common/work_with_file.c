@@ -1,4 +1,4 @@
-#include"options.h"
+#include"work_with_file.h"
 void read_file(char filename[], char *file[], size_t *size_file){
 	FILE*fp = fopen(filename,"r");
 	if (fp){
