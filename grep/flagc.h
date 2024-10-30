@@ -2,7 +2,8 @@
 #include<string.h>
 #include<stdlib.h>
 typedef struct  flag_grep{
-	char word[100];
+	char word[100][100];
+	int count_words;
 	int baza;
 	int grep_e;
 	int grep_i;

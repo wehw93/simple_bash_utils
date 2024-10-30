@@ -3,21 +3,14 @@
 void par_flags(flag_grep * arg, int argc, char * argv[], size_t *count_files){
 	int res = 0;
 	int flag = 0;
-	for (int i = 1; i < argc; i++){
-		if (argv[i][0]!= '-'){
-			strcpy((arg->word), argv[i]);
-			break;
-		}
-	}
-	for (int i = 1; i < argc; i++){
-		if (argv[i][0]!= '-' && (strcmp(argv[i], arg->word)!=0))
-			(*count_files)++;	
-	}
+	int count_E = 0;
+	int indexOfWords = 0;
 	while((res = getopt_long(argc,argv,"eivcln",NULL, NULL))!=-1){
 		
 		if (res == 'e'){
 			arg->grep_e = 1;		
 			flag = 1;
+			count_E++;
 		}
 		if (res == 'i'){
 			arg->grep_i = 1;		
@@ -40,7 +33,25 @@ void par_flags(flag_grep * arg, int argc, char * argv[], size_t *count_files){
 			flag = 1;
 		}
 	}
+	for (int i = 1; i <= count_E*2; i++){
+		if (argv[i][0]!= '-'){
+			strcpy((arg->word[indexOfWords++]), argv[i]);
+				arg->count_words++;
+		}
+	}
 	if (!flag){
 		arg->baza = 1;
+		for (int i = 1; i < argc; i++){
+			if (argv[i][0]!= '-'){
+				strcpy((arg->word[indexOfWords++]), argv[i]);	
+				arg->count_words++;
+				break;
+			}
+		}
+	}
+	for (int i = count_E*2 +1; i < argc; i++){
+		if (argv[i][0]!= '-' ){
+			(*count_files)++;	
+			}
 	}
 }

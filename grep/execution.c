@@ -30,10 +30,12 @@ void execution(flag_grep arg, char * argv[], int argc, size_t quantity_files){
 }
 void execute_options( flag_grep arg, char *buffer[], size_t *size_file){
 		if (arg.baza){
-			grep_default(buffer, size_file, arg.word);
+			grep_default(buffer, size_file, arg.word[0]);
 		}	
 		if (arg.grep_e){
-			sprintf((*buffer)+5, "e");
+			for (int i = 0; i < arg.count_words; i++){
+			   grep_E(buffer, size_file, arg.word, arg.count_words);
+			}	   
 		}
 		if (arg.grep_i){
 			sprintf((*buffer)+5, "i");
