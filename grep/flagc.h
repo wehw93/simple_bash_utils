@@ -12,6 +12,6 @@ typedef struct  flag_grep{
 	int grep_l;
 	int grep_n;
 }flag_grep;
-void execute_options( flag_grep arg, char *buffer[], size_t *size_file);
+void execute_options( flag_grep arg, char *buffer[], size_t *size_file, int *count_res);
 void execution(flag_grep arg, char * argv[], int argc, size_t quantity_files);
 void par_flags(flag_grep * arg, int argc, char * argv[], size_t *count_files);
