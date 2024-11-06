@@ -1,9 +1,9 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<ctype.h>
-void cat_defalut( char *buffer[],size_t size_file);
-void cat_b( char * buffer[], size_t*size_file );
+#include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+void cat_defalut(char *buffer[], size_t size_file);
+void cat_b(char *buffer[], size_t *size_file);
 void cat_n(char *buffer[], size_t *size_file);
 void cat_E(char *buffer[], size_t *size_file);
 void cat_t(char *buffer[], size_t *size_file);
