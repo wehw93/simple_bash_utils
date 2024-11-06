@@ -1,14 +1,14 @@
 #define _GNU_SOURCE
+#define MAX_LEN 1000
 #include"options.h"
 void grep_default(char *buffer[], size_t *size_file, char word[], int flag_i, int flag_v, int *count_res, int grep_n){
-	int sz = 0;
 	char* buf = calloc(*size_file, sizeof(char));
 	char* temp = calloc(*size_file, sizeof(char));
 	int indexForTemp = 0;
 	int indexForBuf = 0;
 	int line = 0;
 	if (flag_v){
-		for (int i = 0; i < *size_file; i++){
+		for (size_t i = 0; i < *size_file; i++){
 			line++;
 			while  ((*buffer)[i]!='\n'){
 				temp[indexForTemp++] = (*buffer)[i];
@@ -43,7 +43,7 @@ void grep_default(char *buffer[], size_t *size_file, char word[], int flag_i, in
 		}
 	}
 	else{
-		for (int i = 0; i < *size_file; i++){
+		for (size_t i = 0; i < *size_file; i++){
 			line++;
 			while  ((*buffer)[i]!='\n'){
 				temp[indexForTemp++] = (*buffer)[i];
@@ -77,11 +77,13 @@ void grep_default(char *buffer[], size_t *size_file, char word[], int flag_i, in
 			 indexForTemp = 0;
 		}
 	}
+	char* ptr = *buffer;
 	*size_file = indexForBuf;
 	*buffer = buf;
+	free(ptr);
+	free(temp);
 }
-void grep_E(char *buffer[], size_t *size_file, char word[][100], int count_words, int flag_i, int flag_v, int *count_res, int grep_n){
-	int sz = 0;
+void grep_E(char *buffer[], size_t *size_file, char word[][MAX_LEN], int count_words, int flag_i, int flag_v, int *count_res, int grep_n){
 	char* buf = calloc(*size_file*2, sizeof(char));
 	char* temp = calloc(*size_file, sizeof(char));
 	int indexForTemp = 0;
@@ -89,7 +91,7 @@ void grep_E(char *buffer[], size_t *size_file, char word[][100], int count_words
 	int flag_V = 0;
 	int line = 0;
 		if (flag_v){
-			for (int i = 0; i < *size_file; i++){
+			for (size_t i = 0; i < *size_file; i++){
 				line++;
 				while  ((*buffer)[i]!='\n'){
 					temp[indexForTemp++] = (*buffer)[i];
@@ -130,7 +132,7 @@ void grep_E(char *buffer[], size_t *size_file, char word[][100], int count_words
 		}
 		}
 		else{
-			for (int i = 0; i < *size_file; i++){
+			for (size_t i = 0; i < *size_file; i++){
 				line++;
 			
 				while  ((*buffer)[i]!='\n'){
@@ -165,6 +167,9 @@ void grep_E(char *buffer[], size_t *size_file, char word[][100], int count_words
 		 	indexForTemp = 0;
 		}
 	}
+	char* ptr = *buffer;
 	*size_file = indexForBuf;
 	*buffer = buf;
+	free(ptr);
+	free(temp);
 }

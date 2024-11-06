@@ -1,7 +1,7 @@
 #include"flags.h"
 #include"../common/work_with_file.h"
 void execution(flag_cat arg, char * argv[], int argc, size_t quantity_files){
-	char * buffer  = calloc(1,sizeof(char));	
+	char * buffer  = 0;	
 	size_t size_file = 0;
 	for (int i = argc-quantity_files; i <argc ; i++){
 		read_file(argv[i], &buffer,&size_file); 
@@ -41,7 +41,7 @@ void execution(flag_cat arg, char * argv[], int argc, size_t quantity_files){
 			flag_v = 1;
 			cat_v(&buffer, &size_file);
 		}
-	for (int i = 0; i < strlen(buffer);i++){		
+	for (size_t i = 0; i < strlen(buffer);i++){		
 		printf("%c", buffer[i]);
 	}
 	free(buffer);

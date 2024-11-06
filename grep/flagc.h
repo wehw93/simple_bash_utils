@@ -1,8 +1,9 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#define MAX_LEN 1000
 typedef struct  flag_grep{
-	char word[100][100];
+	char word[MAX_LEN][MAX_LEN];
 	int count_words;
 	int baza;
 	int grep_e;
