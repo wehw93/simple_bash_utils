@@ -194,7 +194,6 @@ void cat_v(char *buf[], size_t *size_file) {
       j += 3;
       continue;
     }
-
     if (isprint((unsigned char)(*buf)[i]) == 0 && (*buf)[i] < -96) {
       sprintf(buffer + j, "M-%c", ((*buf)[i]) + 192);
       j += 3;
