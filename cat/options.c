@@ -1,5 +1,5 @@
 #include "options.h"
-void cat_n(char *buf[], size_t *size_file) {
+void cat_n(char *buf[], size_t *size_file, int * count_n) {
   int sz = *size_file;
   for (size_t i = 0; i < *size_file; i++) {
     if ((*buf)[i] == '\n')
@@ -8,13 +8,12 @@ void cat_n(char *buf[], size_t *size_file) {
   char *buffer = calloc(sz, sizeof(char));
   int flag = 1;
   size_t j = 0;
-  int number_line = 1;
   for (size_t i = 0; i < *size_file; i++) {
     if (flag) {
-      sprintf(buffer + j, "%6d\t", number_line);
+      sprintf(buffer + j, "%6d\t", *count_n);
       j += 7;
       flag = 0;
-      number_line++;
+      (*count_n)++;
     }
     if ((*buf)[i] == '\n') {
       flag = 1;
@@ -28,21 +27,20 @@ void cat_n(char *buf[], size_t *size_file) {
   free(ptr);
   *size_file = sz;
 }
-void cat_b(char *buf[], size_t *size_file) {
+void cat_b(char *buf[], size_t *size_file, int *count_b) {
   int sz = *size_file;
   for (size_t i = 0; i < *size_file; i++) {
     if ((*buf)[i] == '\n')
       sz += 8;
   }
   char *buffer = calloc(sz, sizeof(char));
-  int number_line = 1;
   int flag = 1;
   int j = 0;
   for (size_t i = 0; i < *size_file; i++) {
     if (flag && (*buf)[i] != '\n') {
-      sprintf(buffer + j, "%6d\t", number_line);
+      sprintf(buffer + j, "%6d\t", *count_b);
       j += 7;
-      number_line++;
+      (*count_b)++;
       flag = 0;
     }
 
@@ -67,31 +65,32 @@ void cat_defalut(char **buf, size_t size_file) {
   *buf = buffer;
   free(ptr);
 }
+void cat_t(char *buf[], size_t * size_file){
+	cat_T(buf, size_file);
+	cat_v(buf,size_file);
+}
+void cat_T(char *buf[], size_t *size_file) {
+  size_t outlen = *size_file;
 
-void cat_t(char *buf[], size_t *size_file) {
-  int sz = *size_file;
+  for (size_t i = 0; i < *size_file; i++) {
+    if ((*buf)[i] == '\t') outlen++;
+  }
+
+  char* buffer = calloc(outlen + 1, sizeof(char));
+  size_t j = 0;
+
   for (size_t i = 0; i < *size_file; i++) {
     if ((*buf)[i] == '\t')
-      sz += 2;
-  }
-  char *buffer = calloc(sz, sizeof(char));
-  int j = 0;
-  for (size_t i = 0; i < *size_file; i++) {
-    if ((*buf)[i] == '\t') {
-      sprintf(buffer + j, "^");
-      j++;
-      sprintf(buffer + j, "I");
-      j++;
-    } else {
-      sprintf(buffer + j, "%c", (*buf)[i]);
-      j++;
-    }
+      j += sprintf(buffer + j, "^I");
+    else
+      j += sprintf(buffer + j, "%c", (*buf)[i]);
   }
 
-  char *ptr = *buf;
-  *buf = buffer;
-  free(ptr);
-  *size_file = sz;
+  *size_file = outlen;
+
+  free(*buf);
+  (*buf) = buffer;
+
 }
 void cat_s(char *buf[], size_t *size_file) {
   int sz = 0;
@@ -140,7 +139,7 @@ void cat_E(char *buf[], size_t *size_file) {
     if ((*buf)[i] == '\n')
       sz += 1;
   }
-  char *buffer = calloc(sz, sizeof(char));
+  char *buffer = calloc(sz+1, sizeof(char));
   int j = 0;
   for (size_t i = 0; i < *size_file; i++) {
     if ((*buf)[i] == '\n') {

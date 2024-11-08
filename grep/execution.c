@@ -6,7 +6,7 @@ void execution(flag_grep arg, char *argv[], int argc, size_t quantity_files) {
   size_t size_file = 0;
   int count_res = 0;
   if (quantity_files == 1) {
-    read_file(argv[argc - quantity_files], &buffer, &size_file);
+    read_file(argv[argc - quantity_files], &buffer, &size_file, "grep");
     execute_options(arg, &buffer, &size_file, &count_res);
     if (arg.grep_c)
       printf("%d", count_res);
@@ -23,7 +23,7 @@ void execution(flag_grep arg, char *argv[], int argc, size_t quantity_files) {
     for (size_t i = 0; i < quantity_files; i++) {
       size_file = 0;
       count_res = 0;
-      read_file(argv[argc - quantity_files + i], &buffer, &size_file);
+      read_file(argv[argc - quantity_files + i], &buffer, &size_file, "grep");
       execute_options(arg, &buffer, &size_file, &count_res);
       if (arg.grep_c)
         printf("%s:%d\n", argv[argc - quantity_files + i], count_res);

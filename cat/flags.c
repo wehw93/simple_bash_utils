@@ -24,7 +24,7 @@ void par_flags(flag_cat *arg, int argc, char *argv[], size_t *count_files) {
     }
     if (res == 'T') {
       flag = 1;
-      arg->cat_t = 1;
+      arg->cat_T = 1;
     }
     if (res == 'E') {
       flag = 1;
@@ -39,7 +39,6 @@ void par_flags(flag_cat *arg, int argc, char *argv[], size_t *count_files) {
       arg->cat_e = 1;
     } else if (res == 't') {
       flag = 1;
-      arg->cat_v = 1;
       arg->cat_t = 1;
     } else if (res == 's') {
       flag = 1;

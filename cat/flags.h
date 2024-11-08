@@ -5,6 +5,7 @@ typedef struct flag_cat {
   int cat_e;
   int cat_n;
   int cat_s;
+  int cat_T;
   int cat_t;
   int cat_v;
 } flag_cat;
