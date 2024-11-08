@@ -1,5 +1,5 @@
 #include "options.h"
-void cat_n(char *buf[], size_t *size_file, int * count_n) {
+void cat_n(char *buf[], size_t *size_file, int *count_n) {
   int sz = *size_file;
   for (size_t i = 0; i < *size_file; i++) {
     if ((*buf)[i] == '\n')
@@ -65,18 +65,19 @@ void cat_defalut(char **buf, size_t size_file) {
   *buf = buffer;
   free(ptr);
 }
-void cat_t(char *buf[], size_t * size_file){
-	cat_T(buf, size_file);
-	cat_v(buf,size_file);
+void cat_t(char *buf[], size_t *size_file) {
+  cat_T(buf, size_file);
+  cat_v(buf, size_file);
 }
 void cat_T(char *buf[], size_t *size_file) {
   size_t outlen = *size_file;
 
   for (size_t i = 0; i < *size_file; i++) {
-    if ((*buf)[i] == '\t') outlen++;
+    if ((*buf)[i] == '\t')
+      outlen++;
   }
 
-  char* buffer = calloc(outlen + 1, sizeof(char));
+  char *buffer = calloc(outlen + 1, sizeof(char));
   size_t j = 0;
 
   for (size_t i = 0; i < *size_file; i++) {
@@ -90,7 +91,6 @@ void cat_T(char *buf[], size_t *size_file) {
 
   free(*buf);
   (*buf) = buffer;
-
 }
 void cat_s(char *buf[], size_t *size_file) {
   int sz = 0;
@@ -139,7 +139,7 @@ void cat_E(char *buf[], size_t *size_file) {
     if ((*buf)[i] == '\n')
       sz += 1;
   }
-  char *buffer = calloc(sz+1, sizeof(char));
+  char *buffer = calloc(sz + 1, sizeof(char));
   int j = 0;
   for (size_t i = 0; i < *size_file; i++) {
     if ((*buf)[i] == '\n') {

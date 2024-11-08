@@ -12,3 +12,11 @@ clean:
 
 rebuild:
 	cleat s21_cat
+format:
+	clang-format -i *.c *.h ../common/*.h ../common/*.c
+
+check-format:
+	clang-format -n *.c *.h ../common/*.h ../common/*.c
+
+check:
+	cppcheck --enable=all --suppress=missingIncludeSystem $(FILES) *.c 

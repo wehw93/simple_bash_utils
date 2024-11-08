@@ -1,5 +1,5 @@
 #include "work_with_file.h"
-void read_file(char filename[], char *file[], size_t *size_file, char util[]) {
+void read_file(const char filename[], char *file[], size_t *size_file, const char util[]) {
   FILE *fp = fopen(filename, "r");
   if (fp) {
     int i = *size_file;
@@ -13,8 +13,7 @@ void read_file(char filename[], char *file[], size_t *size_file, char util[]) {
       i++;
     }
     fclose(fp);
-  }
-  else{
-	  printf("%s: %s: Нет такого файла или каталога\n", util,filename);
+  } else {
+    printf("%s: %s: Нет такого файла или каталога\n", util, filename);
   }
 }
