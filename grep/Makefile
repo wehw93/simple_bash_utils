@@ -13,3 +13,12 @@ clean:
 
 rebuild:
 	clean s21_grep
+
+format:
+	clang-format -i *.c *.h ../common/*.h ../common/*.c
+
+check-format:
+	clang-format -n *.c *.h ../common/*.h ../common/*.c
+
+check:
+	cppcheck --enable=all --suppress=missingIncludeSystem $(FILES) *.c *.h ../common/*.c

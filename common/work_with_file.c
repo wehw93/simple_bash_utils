@@ -1,5 +1,6 @@
 #include "work_with_file.h"
-void read_file(const char filename[], char *file[], size_t *size_file, const char util[]) {
+void read_file(const char filename[], char *file[], size_t *size_file,
+               const char util[]) {
   FILE *fp = fopen(filename, "r");
   if (fp) {
     int i = *size_file;

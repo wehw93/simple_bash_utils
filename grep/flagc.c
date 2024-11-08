@@ -1,6 +1,7 @@
 #include "flagc.h"
 #include <getopt.h>
-void par_opts(int argc, char * argv[],flag_grep *arg, int * count_E, int * count_flags);
+void par_opts(int argc, char *argv[], flag_grep *arg, int *count_E,
+              int *count_flags);
 void par_flags(flag_grep *arg, int argc, char *argv[], size_t *count_files) {
   int count_E = 0;
   int indexOfWords = 0;
@@ -34,7 +35,8 @@ void par_flags(flag_grep *arg, int argc, char *argv[], size_t *count_files) {
     }
   }
 }
-void par_opts(int argc, char * argv[],flag_grep *arg, int * count_E, int * count_flags){
+void par_opts(int argc, char *argv[], flag_grep *arg, int *count_E,
+              int *count_flags) {
   int res = 0;
   while ((res = getopt_long(argc, argv, "eivcln", NULL, NULL)) != -1) {
     if (res == 'e') {
