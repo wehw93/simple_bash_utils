@@ -1,40 +1,44 @@
 #include "../common/work_with_file.h"
 #include "flags.h"
-void execution(flag_cat arg, char *argv[], int argc, size_t quantity_files) {
-  char *buffer = 0;
-  size_t size_file;
-  int count_b = 1;
-  int count_n = 1;
-  for (int i = argc - quantity_files; i < argc; i++) {
-    size_file = 0;
-    read_file(argv[i], &buffer, &size_file, "cat");
-    if (arg.baza) {
-      cat_defalut(&buffer, size_file);
+void execution(flag_cat arg,char**filenames, size_t files_count, size_t* files_len) {
+  int count_line = 1;
+  char * buf = 0;
+  for (size_t i = 0; i < files_count; i++) {
+		read_file(filenames[i], &buf, files_len, "cat");	
+		if (*files_len == 0){
+			continue;
+		}
+    if (arg.flag_t) {
+		arg.flag_v = 1;
+      cat_T(&buf, files_len);
     }
-    if (arg.cat_s) {
-      cat_s(&buffer, &size_file);
+    if (arg.flag_T) {
+      cat_T(&buf, files_len);
     }
-    if (arg.cat_b) {
-      cat_b(&buffer, &size_file, &count_b);
+    if (arg.flag_s) {
+      cat_s(&buf, files_len);
     }
-    if (arg.cat_e) {
-      cat_E(&buffer, &size_file);
+    if (arg.flag_b) {
+      cat_b(&buf, files_len, &count_line);
     }
-    if (arg.cat_n) {
-      cat_n(&buffer, &size_file, &count_n);
+    if (arg.flag_e) {
+		arg.flag_v = 1;
+      cat_E(&buf, files_len);
     }
-    if (arg.cat_t) {
-      cat_t(&buffer, &size_file);
+    if (arg.flag_E) {
+      cat_E(&buf, files_len);
     }
-    if (arg.cat_T) {
-      cat_T(&buffer, &size_file);
+    if (arg.flag_n) {
+      cat_n(&buf, files_len, &count_line);
     }
-    if (arg.cat_v) {
-      cat_v(&buffer, &size_file);
-    }
-    for (size_t j= 0; j < strlen(buffer); j++) {
-      printf("%c", buffer[j]);
-    }
-  }
-  free(buffer);
+	if (arg.flag_v ){
+      cat_v(&buf, files_len);
+	}
+if (!arg.flag_v){
+	for (size_t i  = 0; i < *files_len; i++){
+      printf("%c",buf[i]);
+	}
+}
+free(buf);
+}
 }
