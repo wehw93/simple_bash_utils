@@ -9,7 +9,7 @@ void execution(flag_grep arg, char *argv[], int argc, size_t quantity_files) {
     read_file(argv[argc - quantity_files], &buffer, &size_file, "grep");
     execute_options(arg, &buffer, &size_file, &count_res);
     if (arg.grep_c)
-      printf("%d", count_res);
+      printf("%d\n", count_res);
     else {
       if (arg.grep_l && size_file != 0) {
         printf("%s\n", argv[argc - 1]);

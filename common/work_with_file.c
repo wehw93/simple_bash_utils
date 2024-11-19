@@ -1,21 +1,18 @@
 #include "work_with_file.h"
-void read_file(const char filename[], char *file[], size_t *size_file,
+void read_file(const char filename[], char *buf[], size_t *size_file,
                const char util[]) {
   FILE *fp = fopen(filename, "r");
+  size_t len = 0;
   if (fp) {
-    int i =0;
     fseek(fp, 0L, SEEK_END);
     *size_file = ftell(fp);
     fseek(fp, 0L, SEEK_SET);
-    *file = realloc(*file, *size_file * sizeof(char));
-    char c[1];
-    while ((c[0] = getc(fp)) != EOF) {
-      (*file)[i] = c[0];
-      i++;
-    }
+    *buf = realloc(*buf, *size_file * sizeof(char));
+	len = fread(*buf,sizeof(char), *size_file, fp);
     fclose(fp);
   } else {
     printf("%s: %s: Нет такого файла или каталога\n", util, filename);
-	*size_file = 0;
+    *size_file = 0;
   }
+  *size_file = len;
 }

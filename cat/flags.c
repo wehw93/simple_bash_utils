@@ -1,9 +1,9 @@
 #include "flags.h"
 
-#include "getopt.h"
 void par_opts(int argc, char *argv[], int *flag, flag_cat *arg,
               const struct option long_options[]);
-void par_flags(flag_cat *arg, int argc, char *argv[], size_t *count_files,  char *** filenames) {
+void par_flags(flag_cat *arg, int argc, char *argv[], size_t *count_files,
+               char ***filenames) {
   const struct option long_options[] = {{"number-nonblank", 0, 0, 'b'},
                                         {"number", 0, 0, 'n'},
                                         {"squeeze-blank", 0, 0, 's'},
@@ -18,9 +18,13 @@ void par_flags(flag_cat *arg, int argc, char *argv[], size_t *count_files,  char
   for (int i = 1; i < argc; i++) {
     if (argv[i][0] != '-') (*count_files)++;
   }
-  *filenames = calloc(*count_files, sizeof(char*));
+  *filenames = calloc(*count_files, sizeof(char *));
+
   for (int i = 1; i < argc; i++) {
-    if (argv[i][0] != '-') (*filenames)[j++] = argv[i]; 
+    if (argv[i][0] != '-') {
+      (*filenames)[j] = argv[i];
+      j++;
+    }
   }
   par_opts(argc, argv, &flag, arg, long_options);
   if (flag == 0) {

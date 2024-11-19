@@ -1,4 +1,6 @@
+
 #include "flagc.h"
+
 #include <getopt.h>
 void par_opts(int argc, char *argv[], flag_grep *arg, int *count_E,
               int *count_flags);
