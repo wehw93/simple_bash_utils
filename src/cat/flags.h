@@ -1,5 +1,4 @@
 #include <getopt.h>
-
 #include "options.h"
 void par_flags(flag_cat *arg, int argc, char *argv[], size_t *count_flags,
                char ***filenames);

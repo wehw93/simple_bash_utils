@@ -4,7 +4,7 @@ TARGET = s21_cat
 FILES = *.c ../common/work_with_file.c
 all: $(TARGET)
 
-$(TARGET) : $(FILES)
+$(TARGET) : clean $(FILES)
 	$(CC) $(CFLAGS) $(FILES) -o $(TARGET)
 
 clean:

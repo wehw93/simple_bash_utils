@@ -94,10 +94,7 @@ void cat_s(char** buf, size_t* size_file) {
       sz++;
       per++;
     }
-    if ((*buf)[i] == '\n' && per > 2) {
-      continue;
-    }
-    if ((*buf)[i] != '\n') {
+    if ((*buf)[i] != '\n' && per <=2) {
       per = 0;
       sz++;
     }
@@ -110,10 +107,7 @@ void cat_s(char** buf, size_t* size_file) {
       j++;
       per++;
     }
-    if (per > 2 && (*buf)[i] == '\n') {
-      continue;
-    }
-    if ((*buf)[i] != '\n') {
+    if ((*buf)[i] != '\n' && per <=2) {
       sprintf(buffer + j, "%c", (*buf)[i]);
       j++;
       per = 0;
@@ -154,20 +148,18 @@ void cat_T(char* buf[], size_t* size_file) {
 }
 
 void cat_v(char** buf, const size_t* size_file) {
-for (size_t i = 0; i < *size_file; i++) {
+  for (size_t i = 0; i < *size_file; i++) {
     char ch = (*buf)[i];
-    if (isprint(ch) || ch == '\n' || ch == '\t')
-	{
+    if (isprint(ch) || ch == '\n' || ch == '\t') {
       printf("%c", ch);
-	}
-    else if (iscntrl(ch)) {
+    } else if (iscntrl(ch)) {
       if (ch == 127) {
         printf("^%c", ch - 64);
       } else {
         printf("^%c", ch + 64);
       }
     } else {
-		char s = ch+128;
+      char s = ch + 128;
       printf("M-");
       if (isprint((unsigned char)s)) {
         printf("%c", s);

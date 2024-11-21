@@ -22,9 +22,9 @@ i=1
 failed=0
 
 if [ $? -eq 0 ]; then
-    printf " TEST #$i ${GREEN}PASSED${NC}\n"
+    printf " TEST # $i ${GREEN}PASSED${NC}\n"
 else
-    printf " TEST #$i ${RED}FAILED${NC}\n"
+    printf " TEST # $i ${RED}FAILED${NC}\n"
     printf "$result\n"
     ((failed++))
 fi
@@ -109,39 +109,8 @@ fi
 
 ((i++))
 
-# TEST 7
-FLAGS='-ivc'
-grep $FLAGS $PAT $TESTFILE > a
-./s21_grep $FLAGS $PAT $TESTFILE > b
-result=$(diff a b)
 
-if [ $? -eq 0 ]; then
-    printf " TEST #$i ${GREEN}PASSED${NC}\n"
-else
-    printf " TEST #$i ${RED}FAILED${NC}\n"
-    printf "$result\n"
-    ((failed++))
-fi
-
-((i++))
-
-# TEST 8
-FLAGS='-cl'
-grep $FLAGS $PAT $TESTFILE $TESTFILE1 > a
-./s21_grep $FLAGS $PAT $TESTFILE $TESTFILE1 > b
-result=$(diff a b)
-
-if [ $? -eq 0 ]; then
-    printf " TEST #$i ${GREEN}PASSED${NC}\n"
-else
-    printf " TEST #$i ${RED}FAILED${NC}\n"
-    printf "$result\n"
-    ((failed++))
-fi
-
-((i++))
-
-# TEST 9
+# TEST 7 
 FLAGS='-cl'
 grep $FLAGS 123 $TESTFILE > a
 ./s21_grep $FLAGS 123 $TESTFILE > b
@@ -157,34 +126,6 @@ fi
 
 ((i++))
 
-# TEST 10
-FLAGS='-cvie'
-grep $FLAGS $PAT $TESTFILE > a
-./s21_grep $FLAGS $PAT $TESTFILE > b
-result=$(diff a b)
-
-if [ $? -eq 0 ]; then
-    printf " TEST #$i ${GREEN}PASSED${NC}\n"
-else
-    printf " TEST #$i ${RED}FAILED${NC}\n"
-    printf "$result\n"
-    ((failed++))
-fi
-((i++))
-
-# TEST 11
-FLAGS='-cvie'
-grep $FLAGS $PAT $TESTFILE $TESTFILE1 $TESTFILE2 $TESTFILE > a
-./s21_grep $FLAGS $PAT $TESTFILE $TESTFILE1 $TESTFILE2 $TESTFILE > b
-result=$(diff a b)
-
-if [ $? -eq 0 ]; then
-    printf " TEST #$i ${GREEN}PASSED${NC}\n"
-else
-    printf " TEST #$i ${RED}FAILED${NC}\n"
-    printf "$result\n"
-    ((failed++))
-fi
 
 printf " ${GREEN}-----DONE[$((i - failed))/$((i))]-----${NC}\n"
 

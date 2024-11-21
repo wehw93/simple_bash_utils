@@ -65,4 +65,7 @@ void par_opts(int argc, char *argv[], int *flag, flag_cat *arg,
       arg->flag_n = 1;
     }
   }
+  if (arg->flag_b && arg->flag_n) {
+    arg->flag_n = 0;
+  }
 }
