@@ -5,7 +5,9 @@ void grep_default(char *buffer[], size_t *size_file,regex_t *regex,  char * file
 	char *temp = calloc(*size_file, sizeof(char));
 	size_t ind_temp = 0;
 	int count = 0;
+	int line = 0;
 	for (size_t i = 0; i < *size_file; i++){
+		line++;
 		while ((*buffer)[i]!='\n' && (*buffer)[i]!='\0'){
 				temp[ind_temp++] = (*buffer)[i];
 				i++;
@@ -20,10 +22,16 @@ void grep_default(char *buffer[], size_t *size_file,regex_t *regex,  char * file
 		if (res==1){
 			count++;
 		}
-		if (res==1 && !one && !arg.flag_c){
-			printf("%s:%s\n", filenames,temp);
+		if (res==1 && !one && !arg.flag_c && !arg.flag_l && arg.flag_n){
+			printf("%s:%d:%s\n", filenames,line,temp);
 		}
-		if (res==1 && one && !arg.flag_c){
+		if (res==1 && !one && !arg.flag_c && !arg.flag_l && !arg.flag_n){
+			printf("%s:%d:%s\n", filenames,line,temp);
+		}
+		if (res==1 && one && !arg.flag_c && !arg.flag_l && arg.flag_n){
+			printf("%d:%s\n", line,temp);
+		}
+		if (res==1 && one && !arg.flag_c && !arg.flag_l && !arg.flag_n){
 			printf("%s\n", temp);
 		}
 		memset(temp,0,sizeof(char)*ind_temp);
@@ -34,6 +42,9 @@ void grep_default(char *buffer[], size_t *size_file,regex_t *regex,  char * file
 	}
 	if (arg.flag_c && one){
 			printf("%d\n", count);
+	}
+	if (arg.flag_l){
+		printf("%s\n", filenames);
 	}
 			
 
