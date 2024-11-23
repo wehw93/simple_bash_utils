@@ -176,6 +176,41 @@ else
 	printf "$result"
 	((failed++))
 fi
+((i++))
+
+# TEST	11 
+FILE=tests/test2.txt
+FLAGS=-nb
+cat $FLAGS $FILE >a
+./s21_cat $FLAGS $FILE >b
+result=$(diff a b)
+
+if [ $? -eq 0 ]; then
+	printf " TEST #$i ${GREEN}PASSED${NC}\n"
+else
+	printf " TEST #$i ${RED}FAILED${NC}\n"
+	printf "$result"
+	((failed++))
+fi
+
+((i++))
+
+
+# TEST	12 
+FLAGS=-bs
+cat $FLAGS tests/test1.txt tests/empty.txt >a
+./s21_cat $FLAGS tests/test1.txt tests/empty.txt >b
+result=$(diff a b)
+
+if [ $? -eq 0 ]; then
+	printf " TEST #$i ${GREEN}PASSED${NC}\n"
+else
+	printf " TEST #$i ${RED}FAILED${NC}\n"
+	printf "$result"
+	((failed++))
+fi
+
+((i++))
 
 printf " ${GREEN}-----DONE[$((i - failed))/$((i))]-----${NC}\n"
 

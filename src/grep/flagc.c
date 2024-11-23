@@ -8,14 +8,15 @@ void par_flags(flag_grep *arg, int argc, char *argv[], size_t *count_files) {
   int indexOfWords = 0;
   int count_flags = 0;
   par_opts(argc, argv, arg, &count_E);
-  for (int i = 1; i < argc; i++){
-	  if (argv[i][0] =='-' && argv[i][1]!='e'){
-		  count_flags ++;
-	  }
+  for (int i = 1; i < argc; i++) {
+    if (argv[i][0] == '-' && argv[i][1] != 'e') {
+      count_flags++;
+    }
   }
-for (int i = 1+count_flags + count_E; i < 1+count_flags+count_E*2; i++) {
-      strcpy((arg->word[indexOfWords++]), argv[i]);
-      arg->count_words++;
+  for (int i = 1 + count_flags + count_E; i < 1 + count_flags + count_E * 2;
+       i++) {
+    strcpy((arg->word[indexOfWords++]), argv[i]);
+    arg->count_words++;
   }
 
   if (!count_E) {

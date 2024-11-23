@@ -20,3 +20,6 @@ check-format:
 
 check:
 	cppcheck --enable=all --suppress=missingIncludeSystem $(FILES) *.c 
+valgrind: all
+	valgrind --tool=memcheck --leak-check=yes  ./s21_cat  -t  tests/test1.txt tests/empty.txt
+

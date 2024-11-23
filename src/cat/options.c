@@ -94,12 +94,12 @@ void cat_s(char** buf, size_t* size_file) {
       sz++;
       per++;
     }
-    if ((*buf)[i] != '\n' && per <=2) {
+    if ((*buf)[i] != '\n' && per <= 2) {
       per = 0;
       sz++;
     }
   }
-  char* buffer = calloc(sz, sizeof(char));
+  char* buffer = calloc(sz + 1, sizeof(char));
   per = 0;
   for (size_t i = 0; i < *size_file; i++) {
     if ((*buf)[i] == '\n' && per < 2) {
@@ -107,7 +107,7 @@ void cat_s(char** buf, size_t* size_file) {
       j++;
       per++;
     }
-    if ((*buf)[i] != '\n' && per <=2) {
+    if ((*buf)[i] != '\n' && per <= 2) {
       sprintf(buffer + j, "%c", (*buf)[i]);
       j++;
       per = 0;
@@ -127,7 +127,7 @@ void cat_T(char* buf[], size_t* size_file) {
       sz++;
     }
   }
-  char* buffer = calloc(sz, sizeof(char));
+  char* buffer = calloc(sz + 1, sizeof(char));
   int j = 0;
   for (size_t i = 0; i < *size_file; i++) {
     if ((*buf)[i] == '\t') {

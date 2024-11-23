@@ -125,8 +125,64 @@ else
 fi
 
 ((i++))
+#test 8
+FLAGS='-ivc'
+grep $FLAGS aboba  $TESTFILE > a
+./s21_grep $FLAGS aboba  $TESTFILE > b
+result=$(diff a b)
 
+if [ $? -eq 0 ]; then
+    printf " TEST #$i ${GREEN}PASSED${NC}\n"
+else
+    printf " TEST #$i ${RED}FAILED${NC}\n"
+    printf "$result\n"
+    ((failed++))
+fi
 
+((i++))
+
+FLAGS='-ic'
+grep $FLAGS -e aboba  -e popa $TESTFILE $TESTFILE2 tests/t.txt> a
+./s21_grep $FLAGS -e aboba -e popa  $TESTFILE $TESTFILE2 tests/t.txt > b
+result=$(diff a b)
+
+if [ $? -eq 0 ]; then
+    printf " TEST #$i ${GREEN}PASSED${NC}\n"
+else
+    printf " TEST #$i ${RED}FAILED${NC}\n"
+    printf "$result\n"
+    ((failed++))
+fi
+
+((i++))
+FLAGS='-cl'
+grep $FLAGS  aboba  tests/test.txt tests/t.txt> a
+./s21_grep $FLAGS  aboba tests/test.txt tests/t.txt > b
+result=$(diff a b)
+
+if [ $? -eq 0 ]; then
+    printf " TEST #$i ${GREEN}PASSED${NC}\n"
+else
+    printf " TEST #$i ${RED}FAILED${NC}\n"
+    printf "$result\n"
+    ((failed++))
+fi
+
+((i++))
+FLAGS='-vn'
+grep $FLAGS  -e abob -e pop tests/test.txt tests/t.txt> tests/test1.txt > a
+./s21_grep $FLAGS  -e abob -e pop tests/test.txt tests/t.txt tests/test1.txt > b
+result=$(diff a b)
+
+if [ $? -eq 0 ]; then
+    printf " TEST #$i ${GREEN}PASSED${NC}\n"
+else
+    printf " TEST #$i ${RED}FAILED${NC}\n"
+    printf "$result\n"
+    ((failed++))
+fi
+
+((i++))
 printf " ${GREEN}-----DONE[$((i - failed))/$((i))]-----${NC}\n"
 
 rm a b

@@ -23,4 +23,4 @@ check-format:
 check:
 	cppcheck --enable=all --suppress=missingIncludeSystem $(FILES) *.c *.h ../common/*.c
 valgrind: all
-	valgrind --tool=memcheck --leak-check=yes -q ./s21_grep  -vc -e aboba -e popa tests/test.txt 
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep   -ic   -e aboba  -e popa  tests/test.txt tests/t.txt tests/test1.txt
