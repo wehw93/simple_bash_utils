@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../common/work_with_file.h"
+#include "work_with_file.h"
 typedef struct flag_cat {
   int baza;
   int flag_b;

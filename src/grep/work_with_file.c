@@ -8,8 +8,9 @@ void read_file(const char filename[], char *buf[], size_t *size_file,
     *size_file = ftell(fp);
     fseek(fp, 0L, SEEK_SET);
     if (*size_file != 0) {
-      *buf = realloc(*buf, *size_file * sizeof(char));
+      *buf = realloc(*buf, (*size_file+1) * sizeof(char));
     }
+	(*buf)[*size_file] = '\0';	
     len = fread(*buf, sizeof(char), *size_file, fp);
     fclose(fp);
   } else {

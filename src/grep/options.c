@@ -1,4 +1,5 @@
 #define MAX_LEN 1000
+
 #include "options.h"
 int func_reg(flag_grep arg, regex_t *regex, char *temp);
 void grep_default(char *buffer[], const size_t *size_file, regex_t *regex,

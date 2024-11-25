@@ -25,6 +25,7 @@ if [ $? -eq 0 ]; then
     printf " TEST # $i ${GREEN}PASSED${NC}\n"
 else
     printf " TEST # $i ${RED}FAILED${NC}\n"
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep $PAT $TESTFILE
     printf "$result\n"
     ((failed++))
 fi
@@ -40,6 +41,7 @@ if [ $? -eq 0 ]; then
     printf " TEST #$i ${GREEN}PASSED${NC}\n"
 else
     printf " TEST #$i ${RED}FAILED${NC}\n"
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep -v $PAT $TESTFILE
     printf "$result\n"
     ((failed++))
 fi
@@ -55,6 +57,7 @@ if [ $? -eq 0 ]; then
     printf " TEST #$i ${GREEN}PASSED${NC}\n"
 else
     printf " TEST #$i ${RED}FAILED${NC}\n"
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep -i $PAT $TESTFILE
     printf "$result\n"
     ((failed++))
 fi
@@ -71,6 +74,7 @@ if [ $? -eq 0 ]; then
     printf " TEST #$i ${GREEN}PASSED${NC}\n"
 else
     printf " TEST #$i ${RED}FAILED${NC}\n"
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep -c $PAT $TESTFILE
     printf "$result\n"
     ((failed++))
 fi
@@ -87,6 +91,7 @@ if [ $? -eq 0 ]; then
     printf " TEST #$i ${GREEN}PASSED${NC}\n"
 else
     printf " TEST #$i ${RED}FAILED${NC}\n"
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep -l $PAT $TESTFILE $TESTFILE $TESTFILE
     printf "$result\n"
     ((failed++))
 fi
@@ -103,6 +108,7 @@ if [ $? -eq 0 ]; then
     printf " TEST #$i ${GREEN}PASSED${NC}\n"
 else
     printf " TEST #$i ${RED}FAILED${NC}\n"
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep -n $PAT  $TESTFILE
     printf "$result\n"
     ((failed++))
 fi
@@ -120,6 +126,7 @@ if [ $? -eq 0 ]; then
     printf " TEST #$i ${GREEN}PASSED${NC}\n"
 else
     printf " TEST #$i ${RED}FAILED${NC}\n"
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep -cl 123  $TESTFILE
     printf "$result\n"
     ((failed++))
 fi
@@ -135,6 +142,7 @@ if [ $? -eq 0 ]; then
     printf " TEST #$i ${GREEN}PASSED${NC}\n"
 else
     printf " TEST #$i ${RED}FAILED${NC}\n"
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep -ivc aboba  $TESTFILE
     printf "$result\n"
     ((failed++))
 fi
@@ -150,6 +158,7 @@ if [ $? -eq 0 ]; then
     printf " TEST #$i ${GREEN}PASSED${NC}\n"
 else
     printf " TEST #$i ${RED}FAILED${NC}\n"
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep -ic -e aboba -e popa   $TESTFILE $TESTFILE $TESTFILE2 tests/t.txt
     printf "$result\n"
     ((failed++))
 fi
@@ -164,13 +173,14 @@ if [ $? -eq 0 ]; then
     printf " TEST #$i ${GREEN}PASSED${NC}\n"
 else
     printf " TEST #$i ${RED}FAILED${NC}\n"
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep -cl  aboba  tests/t.txt tests/t.txt
     printf "$result\n"
     ((failed++))
 fi
 
 ((i++))
 FLAGS='-vn'
-grep $FLAGS  -e abob -e pop tests/test.txt tests/t.txt> tests/test1.txt > a
+grep $FLAGS  -e abob -e pop tests/test.txt tests/t.txt  tests/test1.txt> a
 ./s21_grep $FLAGS  -e abob -e pop tests/test.txt tests/t.txt tests/test1.txt > b
 result=$(diff a b)
 
@@ -178,6 +188,8 @@ if [ $? -eq 0 ]; then
     printf " TEST #$i ${GREEN}PASSED${NC}\n"
 else
     printf " TEST #$i ${RED}FAILED${NC}\n"
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep -vn  -e aboba -e pop  tests/test.txt tests/t.txt tests/test1.txt
+    printf "$result\n"
     printf "$result\n"
     ((failed++))
 fi

@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Werror -Wall -Wextra -std=c11
 TARGET = s21_cat
-FILES = *.c ../common/work_with_file.c
+FILES = *.c 
 all: $(TARGET)
 
 $(TARGET) : clean $(FILES)

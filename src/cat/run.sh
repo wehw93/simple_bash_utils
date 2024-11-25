@@ -25,6 +25,7 @@ else
 	((failed++))
 fi
 
+valgrind --tool=memcheck --leak-check=yes ./s21_cat $FLAGS $FILE >b
 ((i++))
 
 # TEST 2
@@ -42,6 +43,7 @@ else
 	((failed++))
 fi
 
+valgrind --tool=memcheck --leak-check=yes ./s21_cat $FLAGS $FILE 
 ((i++))
 
 # TEST 3
@@ -58,6 +60,7 @@ else
 	((failed++))
 fi
 
+valgrind --tool=memcheck --leak-check=yes ./s21_cat $FLAGS tests/test2.txt tests/test.txt
 ((i++))
 
 # TEST 4
@@ -75,6 +78,7 @@ else
 	((failed++))
 fi
 
+valgrind --tool=memcheck --leak-check=yes ./s21_cat $FLAGS $FILE 
 ((i++))
 
 # TEST 5
@@ -92,6 +96,7 @@ else
 	((failed++))
 fi
 
+valgrind --tool=memcheck --leak-check=yes ./s21_cat $FLAGS $FILE 
 ((i++))
 
 # TEST 6
@@ -109,6 +114,7 @@ else
 	((failed++))
 fi
 
+valgrind --tool=memcheck --leak-check=yes ./s21_cat $FLAGS $FILE 
 ((i++))
 
 # TEST 7
@@ -126,6 +132,7 @@ else
 	((failed++))
 fi
 
+valgrind --tool=memcheck --leak-check=yes ./s21_cat $FLAGS $FILE 
 ((i++))
 
 # TEST 8
@@ -143,6 +150,7 @@ else
 	((failed++))
 fi
 
+valgrind --tool=memcheck --leak-check=yes ./s21_cat $FLAGS $FILE 
 ((i++))
 
 # TEST 9
@@ -160,6 +168,7 @@ else
 	((failed++))
 fi
 
+valgrind --tool=memcheck --leak-check=yes ./s21_cat $FLAGS $FILE 
 ((i++))
 
 # TEST 10
@@ -176,6 +185,7 @@ else
 	printf "$result"
 	((failed++))
 fi
+valgrind --tool=memcheck --leak-check=yes ./s21_cat $FLAGS $FILE 
 ((i++))
 
 # TEST	11 
@@ -193,6 +203,7 @@ else
 	((failed++))
 fi
 
+valgrind --tool=memcheck --leak-check=yes ./s21_cat $FLAGS $FILE 
 ((i++))
 
 
@@ -210,6 +221,7 @@ else
 	((failed++))
 fi
 
+valgrind --tool=memcheck --leak-check=yes ./s21_cat $FLAGS tests/test1.txt tests/empty.txt 
 ((i++))
 
 printf " ${GREEN}-----DONE[$((i - failed))/$((i))]-----${NC}\n"

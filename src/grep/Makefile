@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -std=c11 -g
 TARGET = s21_grep
-FILES = *.c ../common/work_with_file.c
+FILES = *.c 
 
 all: $(TARGET)
 
@@ -15,12 +15,12 @@ rebuild:
 	clean s21_grep
 
 format:
-	clang-format -i *.c *.h ../common/*.h ../common/*.c
+	clang-format -i *.c *.h 
 
 check-format:
-	clang-format -n *.c *.h ../common/*.h ../common/*.c
+	clang-format -n *.c *.h 
 
 check:
-	cppcheck --enable=all --suppress=missingIncludeSystem $(FILES) *.c *.h ../common/*.c
+	cppcheck --enable=all --suppress=missingIncludeSystem $(FILES) *.c *.h 
 valgrind: all
-	valgrind --tool=memcheck --leak-check=yes ./s21_grep   -ic   -e aboba  -e popa  tests/test.txt tests/t.txt tests/test1.txt
+	valgrind --tool=memcheck --leak-check=yes ./s21_grep  -iv  a  test.txt War.txt

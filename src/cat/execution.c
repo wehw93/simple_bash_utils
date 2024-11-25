@@ -1,4 +1,4 @@
-#include "../common/work_with_file.h"
+#include "work_with_file.h"
 #include "flags.h"
 void execution(flag_cat arg, char** filenames, size_t files_count,
                size_t* files_len) {
