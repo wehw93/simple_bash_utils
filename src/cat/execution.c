@@ -1,5 +1,5 @@
-#include "work_with_file.h"
 #include "flags.h"
+#include "work_with_file.h"
 void execution(flag_cat arg, char** filenames, size_t files_count,
                size_t* files_len) {
   int count_line = 1;

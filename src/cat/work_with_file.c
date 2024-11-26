@@ -10,7 +10,7 @@ void read_file(const char filename[], char *buf[], size_t *size_file,
     if (*size_file != 0) {
       *buf = realloc(*buf, (*size_file) * sizeof(char));
     }
-	
+
     len = fread(*buf, sizeof(char), *size_file, fp);
     fclose(fp);
   } else {
