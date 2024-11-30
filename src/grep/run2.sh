@@ -11,7 +11,7 @@ TESTFILE3=Makefile
 FLAGS=("-v" "-i" "-c" "-l" "-n" "-cl" "-ivc")
 
 # Массив паттернов для поиска
-PATTERNS=("aboba" "123" "test" "hello" "world")
+PATTERNS=("aboba" "123" "test" "hello" "world", "ab")
 
 printf "${GREEN}-----RUNNING TESTS-----${NC}\n"
 
@@ -24,15 +24,15 @@ for PAT in "${PATTERNS[@]}"; do
     # Внутренний цикл по флагам
     for FLAG in "${FLAGS[@]}"; do
         # Выполнение стандартного grep
-        grep $FLAG $PAT $TESTFILE > a
-        ./s21_grep $FLAG $PAT $TESTFILE > b
+        grep $FLAG $PAT $TESTFILE War.txt> a
+        ./s21_grep $FLAG $PAT $TESTFILE War.txt> b
         result=$(diff a b)
 
         if [ $? -eq 0 ]; then
             printf " TEST #$i ${GREEN}PASSED${NC}\n"
         else
             printf " TEST #$i ${RED}FAILED${NC}\n"
-            valgrind --tool=memcheck --leak-check=yes ./s21_grep $FLAG $PAT $TESTFILE
+            valgrind --tool=memcheck --leak-check=yes ./s21_grep $FLAG $PAT $TESTFILE War.txt
             printf "$result\n"
             ((failed++))
         fi
